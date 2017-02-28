@@ -14,12 +14,13 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 #include <stdio.h>
+#include <string.h>
 
 void
 hd(const u_char *data, int len)
 {
-	int	 i;
-	char	 buf[10], hexstr[] = "0123456789abcdef";
+	int	 i, len1;
+	char	 buf[10], abuf[17], hexstr[] = "0123456789abcdef";
 #define hexstring(_c, _b)				\
 	do {						\
 		(_b)[0] = hexstr[((_c) >> 4) & 0xf];	\
@@ -27,21 +28,28 @@ hd(const u_char *data, int len)
 		(_b)[2] = '\0';				\
 	} while (0)
 
-	for (i = 0; i < len; i++) {
+	len1 = ((len + 15)/ 16) * 16;
+	for (i = 0; i < len1; i++) {
 		if ((i % 16) == 0) {
 			hexstring(i >> 24, buf    );
 			hexstring(i >> 16, buf + 2);
 			hexstring(i >> 8 , buf + 4);
 			hexstring(i      , buf + 6);
 			printf("%s ", buf);
+			memset(abuf, 0, sizeof(abuf));
 		}
-		if ((i % 16) == 8)
+		if (i < len) {
+			hexstring(data[i], buf);
+			printf(" %s", buf);
+			abuf[i % 16] =
+			    (0x20 <= data[i] && data[i] <= 0x7e)? data[i] : '.';
+		} else {
+			printf("   ");
+			abuf[i % 16] = ' ';
+		}
+		if ((i % 16) == 7)
 			printf(" -");
-		hexstring(data[i], buf);
-		printf(" %s", buf);
 		if ((i % 16) == 15)
-			printf("\n");
+			printf(" |%s|\n", abuf);
 	}
-	if (i > 0 && (i % 16) != 0)
-		printf("\n");
 }
