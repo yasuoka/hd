@@ -22,23 +22,23 @@ void	 hd(const u_char *, int);
 void
 hd(const u_char *data, int len)
 {
-        int      i, s;
-        char     abuf[17];
+	int	 i, s;
+	char	 abuf[17];
 
-        for (i = 0; i < len; i++) {
-                if ((i % 16) == 0) {
-                        fprintf(stderr, "%08x ", i);
-                        memset(abuf, 0, sizeof(abuf));
-                }
-                fprintf(stderr, " %02x", data[i]);
-                abuf[i % 16] = (isprint((int)data[i]))? data[i] : '.';
-                if ((i % 16) == 7)
-                        fprintf(stderr, " -");
-                if ((i % 16) == 15)
-                        fprintf(stderr, " |%-16s|\n", abuf);
-        }
-        if (i > 0 && (i % 16) != 0) {
-                s = 3 * (16 - (i % 16)) + (((i % 16) < 8)? 2 : 0);
-                fprintf(stderr, "%*s |%-16s|\n", s, " ", abuf);
-        }
+	for (i = 0; i < len; i++) {
+		if ((i % 16) == 0) {
+			fprintf(stderr, "%08x ", i);
+			memset(abuf, 0, sizeof(abuf));
+		}
+		fprintf(stderr, " %02x", data[i]);
+		abuf[i % 16] = (isprint((int)data[i]))? data[i] : '.';
+		if ((i % 16) == 7)
+			fprintf(stderr, " -");
+		if ((i % 16) == 15)
+			fprintf(stderr, " |%-16s|\n", abuf);
+	}
+	if (i > 0 && (i % 16) != 0) {
+		s = 3 * (16 - (i % 16)) + (((i % 16) < 8)? 2 : 0);
+		fprintf(stderr, "%*s |%-16s|\n", s, " ", abuf);
+	}
 }
