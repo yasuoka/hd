@@ -3,6 +3,8 @@ hd.c
 
 A small implementation of printing hexadecimal dump in C
 
+hd2.c is for more restricted systems(eg. bootloader).
+
 Example
 -------
 
