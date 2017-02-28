@@ -1,7 +1,7 @@
 hd.c
 ====
 
-A small implementation of printing hexadecimal dump in C
+A small implementation of printing hexadecimal dump with ascii string in C
 
 hd2.c is for more restricted systems(eg. bootloader).
 
