@@ -43,10 +43,8 @@ hd(const u_char *data, int len)
 			printf(" %s", buf);
 			abuf[i % 16] =
 			    (0x20 <= data[i] && data[i] <= 0x7e)? data[i] : '.';
-		} else {
+		} else
 			printf("   ");
-			abuf[i % 16] = ' ';
-		}
 		if ((i % 16) == 7)
 			printf(" -");
 		if ((i % 16) == 15)

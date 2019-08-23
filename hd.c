@@ -34,13 +34,11 @@ hd(const u_char *data, int len)
 		if (i < len) {
 			fprintf(stderr, " %02x", data[i]);
 			abuf[i % 16] = (isprint((int)data[i]))? data[i] : '.';
-		} else {
+		} else
 			fputs("   ", stderr);
-			abuf[i % 16] = ' ';
-		}
 		if ((i % 16) == 7)
 			fprintf(stderr, " -");
 		if ((i % 16) == 15)
-			fprintf(stderr, " |%-16s|\n", abuf);
+			fprintf(stderr, " |%s|\n", abuf);
 	}
 }
