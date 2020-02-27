@@ -37,8 +37,10 @@ hd(const u_char *data, int len)
 		} else
 			fputs("   ", stderr);
 		if ((i % 16) == 7)
-			fprintf(stderr, " -");
+			fprintf(stderr, " ");
 		if ((i % 16) == 15)
-			fprintf(stderr, " |%s|\n", abuf);
+			fprintf(stderr, "  |%s|\n", abuf);
 	}
+	if (len > 0)
+		fprintf(stderr, "%08x\n", len);
 }

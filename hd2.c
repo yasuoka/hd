@@ -46,8 +46,15 @@ hd(const u_char *data, int len)
 		} else
 			printf("   ");
 		if ((i % 16) == 7)
-			printf(" -");
+			printf(" ");
 		if ((i % 16) == 15)
-			printf(" |%s|\n", abuf);
+			printf("  |%s|\n", abuf);
+	}
+	if (len > 0) {
+		hexstring(len >> 24, buf    );
+		hexstring(len >> 16, buf + 2);
+		hexstring(len >> 8 , buf + 4);
+		hexstring(len      , buf + 6);
+		printf("%s\n", buf);
 	}
 }
