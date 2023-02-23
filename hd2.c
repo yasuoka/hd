@@ -19,8 +19,9 @@
 void
 hd(const u_char *data, int len)
 {
-	int	 i, len1;
-	char	 buf[10], abuf[17], hexstr[] = "0123456789abcdef";
+	int		 i, len1;
+	const char	 hexstr[] = "0123456789abcdef";
+	char		 buf[10], abuf[17];
 #define hexstring(_c, _b)				\
 	do {						\
 		(_b)[0] = hexstr[((_c) >> 4) & 0xf];	\
